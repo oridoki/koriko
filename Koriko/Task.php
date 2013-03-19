@@ -1,6 +1,6 @@
 <?php
 
-namespace Oridoki\DPloyBundle\DPloy;
+namespace Oridoki\KorikoBundle\Koriko;
 
 class Task
 {

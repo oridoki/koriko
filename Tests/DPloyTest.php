@@ -1,10 +1,10 @@
 <?php
 
-namespace Oridoki\DPloyBundle\Tests\DPloy;
+namespace Oridoki\KorikoBundle\Tests\Koriko;
 
-use Oridoki\DPloyBundle\DPloy\Recipe;
+use Oridoki\KorikoBundle\Koriko\Recipe;
 
-class DPloyTest extends \PHPUnit_Framework_TestCase
+class KorikoTest extends \PHPUnit_Framework_TestCase
 {
     public function testMe()
     {

@@ -1,5 +1,5 @@
 {
-    "name": "Oridoki/Dploy",
+    "name": "Oridoki/Koriko",
     "type": "symfony-bundle",
     "description": "Just one Wrapper",
     "keywords": ["wrapper", "bundle"],
@@ -18,8 +18,8 @@
         "symfony/framework-bundle": ">=2.1,<2.2-dev"
     },
     "autoload": {
-        "psr-0": { "Oridoki\\DPloyBundle": "" }
+        "psr-0": { "Oridoki\\KorikoBundle": "" }
     },
     "minimum-stability": "dev",
-    "target-dir": "Oridoki/DPloyBundle"
+    "target-dir": "Oridoki/KorikoBundle"
 }

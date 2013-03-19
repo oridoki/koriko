@@ -1,8 +1,8 @@
 <?php
 
-namespace Oridoki\DPloyBundle\DPloy;
+namespace Oridoki\KorikoBundle\Koriko;
 
-class DPloy
+class Koriko
 {
     protected function task($task_name, $options, $block)
     {

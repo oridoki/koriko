@@ -1,8 +1,8 @@
 <?php
 
-namespace Oridoki\DPloyBundle\DPloy;
+namespace Oridoki\KorikoBundle\Koriko;
 
-class Recipe extends DPloy
+class Recipe extends Koriko
 {
     function execute()
     {

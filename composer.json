@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Just one Wrapper",
     "keywords": ["wrapper", "bundle"],
-    "homepage": "http://github.com/oridoki/d_ploy",
+    "homepage": "https://github.com/oridoki/d-ploy",
     "license": "MIT",
     "authors": [
         {

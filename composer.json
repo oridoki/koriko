@@ -1,0 +1,25 @@
+{
+    "name": "Oridoki/Dploy",
+    "type": "symfony-bundle",
+    "description": "Just one Wrapper",
+    "keywords": ["wrapper", "bundle"],
+    "homepage": "http://github.com/oridoki/d_ploy",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrià Cidre",
+            "email": "adria@oridoki.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.1,<2.2-dev"
+    },
+    "autoload": {
+        "psr-0": { "Oridoki\\DPloyBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Oridoki/DPloyBundle"
+}

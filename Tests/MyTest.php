@@ -8,6 +8,8 @@ class KorikoTest extends \PHPUnit_Framework_TestCase
 {
     public function testMe()
     {
+        echo phpinfo();
+        die;
         $recipe = new Recipe;
         $recipe->execute();
     }

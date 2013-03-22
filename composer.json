@@ -1,9 +1,9 @@
 {
     "name": "Oridoki/Koriko",
     "type": "symfony-bundle",
-    "description": "Just one Wrapper",
-    "keywords": ["wrapper", "bundle"],
-    "homepage": "https://github.com/oridoki/d-ploy",
+    "description": "...",
+    "keywords": ["koriko", "bundle"],
+    "homepage": "https://github.com/oridoki/dkoriko",
     "license": "MIT",
     "authors": [
         {
@@ -24,14 +24,16 @@
         }
     }],
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=5.4.12",
 	    "Oridoki/WrapWrapWrap": "*"
     },
     "require-dev": {
         "symfony/framework-bundle": ">=2.1,<2.2-dev"
     },
     "autoload": {
-        "psr-0": { "Oridoki\\KorikoBundle": "" }
+        "psr-0": {
+            "Oridoki\\KorikoBundle": ""
+        }
     },
     "minimum-stability": "dev",
     "target-dir": "Oridoki/KorikoBundle"

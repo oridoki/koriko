@@ -7,7 +7,7 @@ Koriko is mainly an open source tool to running scripts on multiple servers.
 The main use of this tool is to use it as deploying system for any kind of web applications.
 
 
-###Installation
+##Installation
 
 At the moment of writing this documentation koriko is only aviable by cloning it directly from github.
 
@@ -22,7 +22,7 @@ you can execute the unit tests to see if everything is ok
 phpunit
 ```
 
-###Assumptions
+##Assumptions
 
 You are using SSH access to your remote machines. Telnet and FTP are not supported.
 
@@ -31,7 +31,7 @@ By default koriko is not using user:pwd based authentication, buy you can use it
 Koriko encourages you to use authentication via ssh_key through your server
 
 
-###Writting your recipes
+##Writting your recipes
 
 Writting your scripts over koriko is done on two phases:
 
@@ -42,7 +42,7 @@ Maybe the best approach to use koriko is to create commands independent from rec
 
 You can find a "dummy recipe" and "dummy command" as point to start writting your own code.
 
-###Exectuion
+##Exectuion
 
 To execute your commands you just have an executable on your bin folder, just try to execute:
 

@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+# app/console
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+foreach (scandir(dirname(__DIR__) . '/command') as $file) {
+    if (strstr($file, 'Command.php')) {
+        $command =  '\\Oridoki\\Koriko\\Command\\';
+        $command .= str_replace('.php', '', $file);
+        $application->add(new $command);
+    }
+}
+
+$application->run();

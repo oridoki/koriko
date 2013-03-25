@@ -1,40 +1,27 @@
 {
-    "name": "Oridoki/Koriko",
-    "type": "symfony-bundle",
-    "description": "...",
-    "keywords": ["koriko", "bundle"],
-    "homepage": "https://github.com/oridoki/dkoriko",
-    "license": "MIT",
+    "name":                         "Oridoki/Koriko",
+    "type":                         "",
+    "description":                  "...",
+    "keywords":                     ["koriko"],
+    "homepage":                     "https://github.com/oridoki/koriko",
+    "license":                      "MIT",
     "authors": [
         {
-            "name": "Adrià Cidre",
-            "email": "adria@oridoki.com"
+            "name":                 "Adrià Cidre",
+            "email":                "adria@oridoki.com"
         }
     ],
-    "repositories": [{
-        "type": "package",
-        "package": {
-            "name": "Oridoki/WrapWrapWrap",
-            "version": "master",
-            "source": {
-                "url": "git@github.com:oridoki/WrapWrapWrap.git",
-                "type": "git",
-                "reference": "master"
-            }
-        }
-    }],
     "require": {
-        "php": ">=5.4.12",
-	    "Oridoki/WrapWrapWrap": "*"
-    },
-    "require-dev": {
-        "symfony/framework-bundle": ">=2.1,<2.2-dev"
+        "php":                      ">=5.4.12",
+        "symfony/console":          "2.2.*",
+        "symfony/class-loader":     "2.0.17",
+        "monolog/monolog":          "1.1.0"
     },
     "autoload": {
         "psr-0": {
-            "Oridoki\\KorikoBundle": ""
+            "Oridoki\\Koriko":      ""
         }
     },
-    "minimum-stability": "dev",
-    "target-dir": "Oridoki/KorikoBundle"
+    "minimum-stability":            "dev",
+    "target-dir":                   "Oridoki/Koriko"
 }

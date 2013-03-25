@@ -1,19 +1,21 @@
 <?php
 
-namespace Oridoki\KorikoBundle\Koriko;
+namespace Oridoki\Koriko\Recipes;
 
-class Recipe extends Koriko
+use Oridoki\Koriko\App\Koriko;
+
+class DummyRecipe extends Koriko
 {
-    function execute()
+    function cook()
     {
-        $this->task('search_libs', array('hosts' => 'www.supu.com'), function($task) {
+        $this->task('search_libs', ['host' => 'localhost'], function($task) {
             $task->run("ls -x1 /usr/lib | grep -i xml");
             $task->run("ls -x2 /usr/lib | grep -i xml");
             $task->run("ls -x3 /usr/lib | grep -i xml");
             $task->run("ls -x4 /usr/lib | grep -i xml");
         });
 
-        $this->task('count_libs', array('hosts' => 'www.supu.com'), function($task) {
+        $this->task('count_libs', ['host' => 'localhost'], function($task) {
             $task->run("ls -x1 /usr/lib | wc -l");
         });
     }

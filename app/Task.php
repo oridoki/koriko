@@ -1,6 +1,6 @@
 <?php
 
-namespace Oridoki\KorikoBundle\Koriko;
+namespace Oridoki\Koriko\App;
 
 class Task
 {
@@ -15,13 +15,7 @@ class Task
 
     public function run($command)
     {
-        $command = $this->pathCommand($command);
         $this->_ssh()->execute($command);
-    }
-
-    protected function pathCommand($command)
-    {
-        return $this->_koriko->pathCommand($command);
     }
 
     protected function _ssh()

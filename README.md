@@ -42,7 +42,7 @@ Maybe the best approach to use koriko is to create commands independent from rec
 
 You can find a "dummy recipe" and "dummy command" as point to start writting your own code.
 
-##Exectuion
+##Execution
 
 To execute your commands you just have an executable on your bin folder, just try to execute:
 

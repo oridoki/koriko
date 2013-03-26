@@ -22,6 +22,11 @@ you can execute the unit tests to see if everything is ok
 phpunit
 ```
 
+##Dependencies
+
+Koriko is based on ssh2 (http://php.net/manual/en/book.ssh2.php) php library. So you need to have this compiled with your php version
+
+
 ##Assumptions
 
 You are using SSH access to your remote machines. Telnet and FTP are not supported.

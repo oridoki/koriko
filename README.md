@@ -1,5 +1,7 @@
 #Koriko - Getting started
 
+[![Build Status](https://secure.travis-ci.org/kpacha/koriko.png?branch=master)](http://travis-ci.org/kpacha/koriko)
+
 Koriko is a concept port from capistrano to php. 
 
 Koriko is mainly an open source tool to running scripts on multiple servers.

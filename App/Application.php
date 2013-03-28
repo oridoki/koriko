@@ -3,6 +3,7 @@
 namespace Oridoki\Koriko\App;
 
 use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Finder\Finder;
 
 class Application extends BaseApplication
 {
@@ -19,12 +20,13 @@ class Application extends BaseApplication
 
     protected function _scanForCommands()
     {
-        foreach (scandir(dirname(__DIR__) . '/Command') as $file) {
-            if (strstr($file, 'Command.php')) {
-                $command = '\\Oridoki\\Koriko\\Command\\';
-                $command .= str_replace('.php', '', $file);
-                $this->add(new $command);
-            }
+        $finder = new Finder;
+        $finder->files()->name('*Command.php')->in(dirname(__DIR__) . '/Command');
+
+        foreach ($finder as $file) {
+            $command = '\\Oridoki\\Koriko\\Command\\';
+            $command .= str_replace('.php', '', $file->getRelativePathname());
+            $this->add(new $command);
         }
     }
 

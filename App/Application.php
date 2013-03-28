@@ -10,22 +10,23 @@ class Application extends BaseApplication
 
     const NAME = 'Koriko Deploy System';
     const VERSION = '0.1';
+    const DEFAULT_NAMESPACE = '\\Oridoki\\Koriko\\Command\\';
+    const DEFAULT_COMMAND_FOLDER = '/../Command';
 
-    public function __construct()
+    public function __construct($commandFolder = self::DEFAULT_COMMAND_FOLDER, $namespace = self::DEFAULT_NAMESPACE)
     {
         parent::__construct(static::NAME, static::VERSION);
 
-        $this->_scanForCommands();
+        $this->_scanForCommandsIn($commandFolder, $namespace);
     }
 
-    protected function _scanForCommands()
+    protected function _scanForCommandsIn($commandFolder, $namespace)
     {
         $finder = new Finder;
-        $finder->files()->name('*Command.php')->in(dirname(__DIR__) . '/Command');
+        $finder->files()->name('*Command.php')->in(__DIR__ . $commandFolder);
 
         foreach ($finder as $file) {
-            $command = '\\Oridoki\\Koriko\\Command\\';
-            $command .= str_replace('.php', '', $file->getRelativePathname());
+            $command = $namespace . str_replace('.php', '', $file->getRelativePathname());
             $this->add(new $command);
         }
     }

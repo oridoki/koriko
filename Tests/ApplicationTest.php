@@ -4,6 +4,7 @@ namespace Oridoki\Koriko\Tests;
 
 use Oridoki\Koriko\App\Application;
 use Oridoki\Koriko\Command\KorikoCommand;
+use Oridoki\Koriko\Tests\Dummy\App\DummyApplication;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,6 +31,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $this->_subject = new Application('/.');
         $this->assertEquals(2, count($this->_subject->all()));
+    }
+    
+    public function testTheConstructorUsesTheDeclaredConstants()
+    {
+        $dummyApp = new DummyApplication;
+        $this->assertEquals(DummyApplication::NAME, $dummyApp->getName());
+        $this->assertNotEquals(Application::NAME, $dummyApp->getName());
+        $this->assertEquals(DummyApplication::VERSION, $dummyApp->getVersion());
+        $this->assertEquals(Application::VERSION, $dummyApp->getVersion());
     }
 
 }

@@ -4,16 +4,7 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-use Symfony\Component\Console\Application;
+use Oridoki\Koriko\App\Application;
 
 $application = new Application();
-
-foreach (scandir(dirname(__DIR__) . '/Command') as $file) {
-    if (strstr($file, 'Command.php')) {
-        $command =  '\\Oridoki\\Koriko\\Command\\';
-        $command .= str_replace('.php', '', $file);
-        $application->add(new $command);
-    }
-}
-
 $application->run();

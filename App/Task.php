@@ -4,6 +4,8 @@ namespace Oridoki\Koriko\App;
 
 class Task
 {
+    use \Oridoki\Koriko\Actions\MySQL;
+
     protected $_koriko      = null;
     protected $_task_name   = '';
 

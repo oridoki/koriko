@@ -21,18 +21,13 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testScanForCommandsInCustomFolder()
     {
-        $this->_subject = new Application('/../Command');
+        $this->_subject = new Application();
+        $this->_subject->setFolder('/../Command');
         $command = new KorikoCommand;
         $command->setApplication($this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));
     }
 
-    public function testScanForCommandsJustScanForCommands()
-    {
-        $this->_subject = new Application('/.');
-        $this->assertEquals(2, count($this->_subject->all()));
-    }
-    
     public function testTheConstructorUsesTheDeclaredConstants()
     {
         $dummyApp = new DummyApplication;

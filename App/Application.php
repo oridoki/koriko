@@ -39,14 +39,14 @@ class Application extends BaseApplication {
         parent::__construct(static::NAME, static::VERSION);
 
         if ($useDefaults) {
-            $this->_loadCommands();
+            $this->loadCommands();
         }
     }
 
     /**
      * Load all commands
      */
-    protected function _loadCommands()
+    public function loadCommands()
     {
         foreach ($this->_allCommands() as $file) {
             $command = $this->_command($file);
@@ -99,16 +99,11 @@ class Application extends BaseApplication {
     /**
      * Commands folder setter
      * @param string $folder
-     * @param boolean $loadCommands Set to true if you want to load commands
-     *                              after the set
      * @return \Oridoki\Koriko\App\Application
      */
-    public function setFolder($folder, $loadCommands = false)
+    public function setFolder($folder)
     {
         $this->_folder = $folder;
-        if ($loadCommands) {
-            $this->_loadCommands();
-        }
         return $this;
     }
 
@@ -124,16 +119,11 @@ class Application extends BaseApplication {
     /**
      * Namespace setter
      * @param string $namespace
-     * @param boolean $loadCommands Set to true if you want to load commands
-     *                              after the set
      * @return \Oridoki\Koriko\App\Application
      */
-    public function setNamespace($namespace, $loadCommands = false)
+    public function setNamespace($namespace)
     {
         $this->_namespace = $namespace;
-        if ($loadCommands) {
-            $this->_loadCommands();
-        }
         return $this;
     }
 

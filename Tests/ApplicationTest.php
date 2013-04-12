@@ -23,8 +23,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function testScanForCustomCommandsInCustomFolder()
     {
         $this->_subject = new Application(false);
-        $this->_subject->setNamespace('\\Oridoki\\Koriko\\Tests\\Dummy\\Command\\');
-        $this->_subject->setFolder('/Tests/Dummy/Command');
+        $this->_subject
+                ->setNamespace('\\Oridoki\\Koriko\\Tests\\Dummy\\Command\\')
+                ->setFolder('/Tests/Dummy/Command', true);
         $command = new DummyCommand;
         $command->setApplication($this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));

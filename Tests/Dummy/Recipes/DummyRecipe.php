@@ -1,9 +1,12 @@
 <?php
 
-namespace Oridoki\Koriko\Recipes;
+namespace Oridoki\Koriko\Tests\Dummy\Recipes;
 
 use Oridoki\Koriko\App\Koriko;
 
+/**
+ * A dummy recipe using some basic console commands
+ */
 class DummyRecipe extends Koriko
 {
     function cook()

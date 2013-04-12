@@ -6,10 +6,10 @@ use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
 
 class Application extends BaseApplication {
-
     /**
      * Application name
      */
+
     const NAME = 'Koriko Deploy System';
 
     /**
@@ -31,12 +31,16 @@ class Application extends BaseApplication {
 
     /**
      * Constructor
+     * @param boolean $useDefaults Set to false if you want to use a custom
+     *                              folder/namespace
      */
-    public function __construct()
+    public function __construct($useDefaults = true)
     {
         parent::__construct(static::NAME, static::VERSION);
 
-        $this->_loadCommands();
+        if ($useDefaults) {
+            $this->_loadCommands();
+        }
     }
 
     /**
@@ -95,10 +99,17 @@ class Application extends BaseApplication {
     /**
      * Commands folder setter
      * @param string $folder
+     * @param boolean $loadCommands Set to true if you want to load commands
+     *                              after the set
+     * @return \Oridoki\Koriko\App\Application
      */
-    public function setFolder($folder)
+    public function setFolder($folder, $loadCommands = false)
     {
         $this->_folder = $folder;
+        if ($loadCommands) {
+            $this->_loadCommands();
+        }
+        return $this;
     }
 
     /**
@@ -113,10 +124,17 @@ class Application extends BaseApplication {
     /**
      * Namespace setter
      * @param string $namespace
+     * @param boolean $loadCommands Set to true if you want to load commands
+     *                              after the set
+     * @return \Oridoki\Koriko\App\Application
      */
-    public function setNamespace($namespace)
+    public function setNamespace($namespace, $loadCommands = false)
     {
-        $this->_folder = $namespace;
+        $this->_namespace = $namespace;
+        if ($loadCommands) {
+            $this->_loadCommands();
+        }
+        return $this;
     }
 
 }

@@ -3,7 +3,8 @@
 namespace Oridoki\Koriko\Tests;
 
 use Oridoki\Koriko\App\Application;
-use Oridoki\Koriko\Command\KorikoCommand;
+use Oridoki\Koriko\Command\DemoCommand;
+use Oridoki\Koriko\Tests\Dummy\Command\DummyCommand;
 use Oridoki\Koriko\Tests\Dummy\App\DummyApplication;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
@@ -14,16 +15,17 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function testScanForCommandsInDefaultFolder()
     {
         $this->_subject = new Application;
-        $command = new KorikoCommand;
+        $command = new DemoCommand;
         $command->setApplication($this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));
     }
 
-    public function testScanForCommandsInCustomFolder()
+    public function testScanForCustomCommandsInCustomFolder()
     {
-        $this->_subject = new Application();
-        $this->_subject->setFolder('/../Command');
-        $command = new KorikoCommand;
+        $this->_subject = new Application(false);
+        $this->_subject->setNamespace('\\Oridoki\\Koriko\\Tests\\Dummy\\Command\\');
+        $this->_subject->setFolder('/Tests/Dummy/Command');
+        $command = new DummyCommand;
         $command->setApplication($this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));
     }

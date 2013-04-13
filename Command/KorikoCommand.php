@@ -10,6 +10,12 @@ use Oridoki\Koriko\Recipes\DummyRecipe;
 
 class KorikoCommand extends Command
 {
+    /**
+     * The dependency injection container
+     * @var \Pimple
+     */
+    protected $_container;
+
     protected function configure()
     {
         $this
@@ -19,7 +25,16 @@ class KorikoCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $recipe = new DummyRecipe;
+        $recipe = new DummyRecipe($this->_container);
         $recipe->cook();
+    }
+
+    /**
+     * DIC setter
+     * @param \Pimple $container
+     */
+    public function setContainer(\Pimple $container)
+    {
+        $this->_container = $container;
     }
 }

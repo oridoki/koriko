@@ -8,23 +8,24 @@ use Oridoki\Koriko\Tests\Dummy\App\DummyApplication;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
+    use Mocks;
 
     protected $_subject;
 
     public function testScanForCommandsInDefaultFolder()
     {
-        $this->_subject = new Application;
-        $command = new KorikoCommand;
-        $command->setApplication($this->_subject);
+        $container = $this->dicMock(array());
+        $this->_subject = $this->_buildApplication($container);
+        $command = $this->_buildCommand($container, $this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));
     }
 
     public function testScanForCommandsInCustomFolder()
     {
-        $this->_subject = new Application();
+        $container = $this->dicMock(array());
+        $this->_subject = $this->_buildApplication($container);
         $this->_subject->setFolder('/../Command');
-        $command = new KorikoCommand;
-        $command->setApplication($this->_subject);
+        $command = $this->_buildCommand($container, $this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));
     }
 
@@ -35,6 +36,21 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals(Application::NAME, $dummyApp->getName());
         $this->assertEquals(DummyApplication::VERSION, $dummyApp->getVersion());
         $this->assertEquals(Application::VERSION, $dummyApp->getVersion());
+    }
+
+    private function _buildCommand($container, $app)
+    {
+        $command = new KorikoCommand;
+        $command->setApplication($app);
+        $command->setContainer($container);
+        return $command;
+    }
+
+    private function _buildApplication($container)
+    {
+        $app = new Application();
+        $app->setContainer($container);
+        return $app->init();
     }
 
 }

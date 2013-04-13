@@ -4,6 +4,7 @@ namespace Oridoki\Koriko\App;
 
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
+use \Pimple;
 
 class Application extends BaseApplication {
 
@@ -30,13 +31,47 @@ class Application extends BaseApplication {
     protected $_namespace = '\\Oridoki\\Koriko\\Command\\';
 
     /**
+     * Dependency Injection Container
+     * @var \Pimple
+     */
+    protected $_container;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         parent::__construct(static::NAME, static::VERSION);
+    }
 
+    /**
+     * Before run, load the DIC and the set of commands
+     * @return \Oridoki\Koriko\App\Application
+     */
+    public function init()
+    {
+        $this->_initContainer();
         $this->_loadCommands();
+        return $this;
+    }
+
+    /**
+     * Instantiate the default DIC if none is set
+     */
+    protected function _initContainer()
+    {
+        if ($this->_container == null) {
+            $this->_container = new KorikoContainer;
+        }
+    }
+
+    /**
+     * Simple DIC setter
+     * @param Pimple $container
+     */
+    public function setContainer(Pimple $container)
+    {
+        $this->_container = $container;
     }
 
     /**
@@ -70,7 +105,9 @@ class Application extends BaseApplication {
     protected function _command($file)
     {
         $command = $this->_namespace() . $this->_commandName($file);
-        return new $command;
+        $commandInstance = new $command;
+        $commandInstance->setContainer($this->_container);
+        return $commandInstance;
     }
 
     /**

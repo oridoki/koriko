@@ -11,7 +11,11 @@ class KorikoTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_subject = new Koriko;
+        $components = array(
+            'ssh' => $this->sshMock(),
+            'logger' => $this->loggerMock()
+        );
+        $this->_subject = new Koriko($this->dicMock($components));
     }
 
     public function testTask()
@@ -22,7 +26,6 @@ class KorikoTest extends \PHPUnit_Framework_TestCase
             throw new \Exception('Test');
         };
 
-        $this->_subject->setSsh($this->sshMock());
         try {
             $this->_subject->task($taskName, $options, $block);
         } catch(\Exception $e) {

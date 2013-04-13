@@ -7,7 +7,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 /**
- * Description of KorikoContainer
+ * Dependency Injection Container for the Koriko Project
  *
  * @author Kpacha <kpacha666@gmail.com>
  */
@@ -15,12 +15,14 @@ class KorikoContainer extends Pimple
 {
     public function __construct()
     {
-        $this['parameter'] = 'foo';
         $this->_initLogger();
         $this->_initConnectionHelpers();
         $this->_initTaskHelpers();
     }
 
+    /**
+     * Setup the singleton logger
+     */
     protected function _initLogger()
     {
         $this['logger'] = $this->share(function () {
@@ -32,6 +34,9 @@ class KorikoContainer extends Pimple
         });
     }
 
+    /**
+     * Setup the singleton ssh driver
+     */
     protected function _initConnectionHelpers()
     {
         $this['ssh'] = $this->share(function () {
@@ -39,8 +44,12 @@ class KorikoContainer extends Pimple
         });
     }
 
+    /**
+     * Setup the default helpers for tasks 
+     */
     protected function _initTaskHelpers()
     {
+        // singleton MySQL helper
         $this['MySQL'] = $this->share(function () {
             return new \Oridoki\Koriko\Helper\MySQL;
         });

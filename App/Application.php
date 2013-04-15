@@ -4,8 +4,11 @@ namespace Oridoki\Koriko\App;
 
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
+use \Pimple;
 
-class Application extends BaseApplication {
+class Application extends BaseApplication
+{
+
     /**
      * Application name
      */
@@ -30,28 +33,64 @@ class Application extends BaseApplication {
     protected $_namespace = '\\Oridoki\\Koriko\\Command\\';
 
     /**
-     * Constructor
-     * @param boolean $useDefaults Set to false if you want to use a custom
-     *                              folder/namespace
+     * Dependency Injection Container
+     * @var \Pimple
      */
-    public function __construct($useDefaults = true)
+    protected $_container;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
         parent::__construct(static::NAME, static::VERSION);
+    }
 
-        if ($useDefaults) {
-            $this->loadCommands();
+    /**
+     * Before run, load the DIC and the set of commands
+     * @return \Oridoki\Koriko\App\Application
+     */
+    public function init()
+    {
+        return $this
+                ->_initContainer()
+                ->_loadCommands();
+    }
+
+    /**
+     * Instantiate the default DIC if none is set
+     * @return \Oridoki\Koriko\App\Application
+     */
+    protected function _initContainer()
+    {
+        if ($this->_container == null) {
+            $this->_container = new KorikoContainer;
         }
+        return $this;
+    }
+
+    /**
+     * Simple DIC setter
+     * @param Pimple $container
+     * @return \Oridoki\Koriko\App\Application
+     */
+    public function setContainer(Pimple $container)
+    {
+        $this->_container = $container;
+        return $this;
     }
 
     /**
      * Load all commands
+     * @return \Oridoki\Koriko\App\Application
      */
-    public function loadCommands()
+    protected function _loadCommands()
     {
         foreach ($this->_allCommands() as $file) {
             $command = $this->_command($file);
             $this->add($command);
         }
+        return $this;
     }
 
     /**
@@ -74,7 +113,9 @@ class Application extends BaseApplication {
     protected function _command($file)
     {
         $command = $this->_namespace() . $this->_commandName($file);
-        return new $command;
+        $commandInstance = new $command;
+        $commandInstance->setContainer($this->_container);
+        return $commandInstance;
     }
 
     /**

@@ -11,4 +11,13 @@ use Oridoki\Koriko\App\Application;
 class DummyApplication extends Application
 {
     const NAME = 'Dummy Deploy System';
+
+    /**
+     * Simple DIC getter for testing
+     * @return \Pimple
+     */
+    public function getContainer()
+    {
+        return $this->_container;
+    }
 }

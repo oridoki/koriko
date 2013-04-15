@@ -2,21 +2,23 @@
 
 namespace Oridoki\Koriko\App;
 
-use \Oridoki\Koriko\App\Ssh;
-
 class Koriko
 {
-    /**
-     * Ssh client
-     * @var null|Oridoki\Koriko\App\Ssh
-     */
-    protected $_ssh     = null;
-
     /**
      * Path to work ok
      * @var string
      */
-    protected $_path    = 'cd ~';
+    protected $_path = 'cd ~';
+
+    /**
+     * The dependency injection container
+     * @var \Pimple
+     */
+    protected $_container;
+
+    public function __construct(\Pimple $container) {
+        $this->_container = $container;
+    }
 
     /**
      * Will run a task for the current script
@@ -41,7 +43,7 @@ class Koriko
     {
         $options = $this->_normalize($options);
 
-        $this->ssh()->connect(
+        $this->helper('ssh')->connect(
             $options['host'],
             $options['port'],
             $options['user'],
@@ -54,7 +56,7 @@ class Koriko
      */
     protected function _disconnect()
     {
-        $this->ssh()->disconnect();
+        $this->helper('ssh')->disconnect();
     }
 
     /**
@@ -74,24 +76,13 @@ class Koriko
     }
 
     /**
-     * Ssh client getter
-     * @return null|Oridoki\Koriko\App\Ssh
+     * Get the required helper from the DIC
+     * @param string $helperName
+     * @return mixed
      */
-    public function ssh()
+    public function helper($helperName)
     {
-        if ($this->_ssh === null) {
-            $this->_ssh = new Ssh();
-        }
-        return $this->_ssh;
-    }
-
-    /**
-     * Ssh client injector
-     * @param Oridoki\Koriko\App\SSh $ssh
-     */
-    public function setSsh($ssh)
-    {
-        $this->_ssh = $ssh;
+        return $this->_container[$helperName];
     }
 }
 

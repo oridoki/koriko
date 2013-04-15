@@ -2,13 +2,13 @@
 
 namespace Oridoki\Koriko\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Oridoki\Koriko\App\KorikoCommand;
 use Oridoki\Koriko\Recipes\DemoRecipe;
 
-class DemoCommand extends Command
+class DemoCommand extends KorikoCommand
 {
     protected function configure()
     {

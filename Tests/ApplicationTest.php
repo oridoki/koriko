@@ -3,7 +3,8 @@
 namespace Oridoki\Koriko\Tests;
 
 use Oridoki\Koriko\App\Application;
-use Oridoki\Koriko\Command\KorikoCommand;
+use Oridoki\Koriko\Command\DemoCommand;
+use Oridoki\Koriko\Tests\Dummy\Command\DummyCommand;
 use Oridoki\Koriko\Tests\Dummy\App\DummyApplication;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
@@ -16,16 +17,20 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $container = $this->dicMock(array());
         $this->_subject = $this->_buildApplication($container);
-        $command = $this->_buildCommand($container, $this->_subject);
+        $command = $this->_buildCommand(
+                new DemoCommand, $container, $this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));
     }
 
-    public function testScanForCommandsInCustomFolder()
+    public function testScanForCustomCommandsInCustomFolder()
     {
         $container = $this->dicMock(array());
-        $this->_subject = $this->_buildApplication($container);
-        $this->_subject->setFolder('/../Command');
-        $command = $this->_buildCommand($container, $this->_subject);
+        $this->_subject = $this->_buildApplication($container, false)
+                ->setNamespace('\\Oridoki\\Koriko\\Tests\\Dummy\\Command\\')
+                ->setFolder('/Tests/Dummy/Command')
+                ->init();
+        $command = $this->_buildCommand(
+                new DummyCommand, $container, $this->_subject);
         $this->assertEquals($command, $this->_subject->get($command->getName()));
     }
 
@@ -38,19 +43,35 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Application::VERSION, $dummyApp->getVersion());
     }
 
-    private function _buildCommand($container, $app)
+    /**
+     * Inject a container and an app to the received command 
+     * @param \Oridoki\Koriko\App\KorikoCommand $command
+     * @param type $container
+     * @param type $app
+     * @return \Oridoki\Koriko\App\KorikoCommand
+     */
+    private function _buildCommand(
+            \Oridoki\Koriko\App\KorikoCommand $command, $container, $app)
     {
-        $command = new KorikoCommand;
         $command->setApplication($app);
         $command->setContainer($container);
         return $command;
     }
 
-    private function _buildApplication($container)
+    /**
+     * Build a DummyApp and inject the container. Also, init the app by default
+     * @param type $container
+     * @param boolean $init Should the app be initialized?
+     * @return \Oridoki\Koriko\Tests\Dummy\App\DummyApplication
+     */
+    private function _buildApplication($container, $init = true)
     {
-        $app = new Application();
+        $app = new DummyApplication;
         $app->setContainer($container);
-        return $app->init();
+        if ($init) {
+            $app->init();
+        }
+        return $app;
     }
 
 }

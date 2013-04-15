@@ -1,21 +1,15 @@
 <?php
 
-namespace Oridoki\Koriko\Command;
+namespace Oridoki\Koriko\Tests\Dummy\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Oridoki\Koriko\Recipes\DummyRecipe;
+use Oridoki\Koriko\App\KorikoCommand;
+use Oridoki\Koriko\Tests\Dummy\Recipes\DummyRecipe;
 
-class KorikoCommand extends Command
+class DummyCommand extends KorikoCommand
 {
-    /**
-     * The dependency injection container
-     * @var \Pimple
-     */
-    protected $_container;
-
     protected function configure()
     {
         $this
@@ -27,14 +21,5 @@ class KorikoCommand extends Command
     {
         $recipe = new DummyRecipe($this->_container);
         $recipe->cook();
-    }
-
-    /**
-     * DIC setter
-     * @param \Pimple $container
-     */
-    public function setContainer(\Pimple $container)
-    {
-        $this->_container = $container;
     }
 }

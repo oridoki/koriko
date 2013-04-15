@@ -6,11 +6,13 @@ use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
 use \Pimple;
 
-class Application extends BaseApplication {
+class Application extends BaseApplication
+{
 
     /**
      * Application name
      */
+
     const NAME = 'Koriko Deploy System';
 
     /**
@@ -50,32 +52,37 @@ class Application extends BaseApplication {
      */
     public function init()
     {
-        $this->_initContainer();
-        $this->_loadCommands();
-        return $this;
+        return $this
+                ->_initContainer()
+                ->_loadCommands();
     }
 
     /**
      * Instantiate the default DIC if none is set
+     * @return \Oridoki\Koriko\App\Application
      */
     protected function _initContainer()
     {
         if ($this->_container == null) {
             $this->_container = new KorikoContainer;
         }
+        return $this;
     }
 
     /**
      * Simple DIC setter
      * @param Pimple $container
+     * @return \Oridoki\Koriko\App\Application
      */
     public function setContainer(Pimple $container)
     {
         $this->_container = $container;
+        return $this;
     }
 
     /**
      * Load all commands
+     * @return \Oridoki\Koriko\App\Application
      */
     protected function _loadCommands()
     {
@@ -83,6 +90,7 @@ class Application extends BaseApplication {
             $command = $this->_command($file);
             $this->add($command);
         }
+        return $this;
     }
 
     /**
@@ -132,10 +140,12 @@ class Application extends BaseApplication {
     /**
      * Commands folder setter
      * @param string $folder
+     * @return \Oridoki\Koriko\App\Application
      */
     public function setFolder($folder)
     {
         $this->_folder = $folder;
+        return $this;
     }
 
     /**
@@ -150,10 +160,12 @@ class Application extends BaseApplication {
     /**
      * Namespace setter
      * @param string $namespace
+     * @return \Oridoki\Koriko\App\Application
      */
     public function setNamespace($namespace)
     {
-        $this->_folder = $namespace;
+        $this->_namespace = $namespace;
+        return $this;
     }
 
 }

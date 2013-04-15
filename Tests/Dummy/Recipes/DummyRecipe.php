@@ -13,9 +13,15 @@ class DummyRecipe extends Koriko
     {
         $this->helper('logger')->addWarning('starting the Dummy Recipe!');
 
-        $this->task('mysql_restart', ['host' => 'localhost'], function($task) {
-            $task->helper('MySQL')->stop();
-            $task->helper('MySQL')->start();
+        $this->task('search_libs', ['host' => 'localhost'], function($task) {
+            $task->run("ls -x1 /usr/lib | grep -i xml");
+            $task->run("ls -x2 /usr/lib | grep -i xml");
+            $task->run("ls -x3 /usr/lib | grep -i xml");
+            $task->run("ls -x4 /usr/lib | grep -i xml");
+        });
+
+        $this->task('count_libs', ['host' => 'localhost'], function($task) {
+            $task->run("ls -x1 /usr/lib | wc -l");
         });
     }
 }

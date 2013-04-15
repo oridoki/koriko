@@ -13,6 +13,18 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     protected $_subject;
 
+    public function testKorikoContainerGeneration()
+    {
+        $this->_subject = new DummyApplication;
+        $this->_subject->init();
+        $container = $this->_subject->getContainer();
+        $this->assertNotNull($container);
+        $this->assertInstanceOf(
+                '\Oridoki\Koriko\App\KorikoContainer', 
+                $container
+            );
+    }
+
     public function testScanForCommandsInDefaultFolder()
     {
         $container = $this->dicMock(array());

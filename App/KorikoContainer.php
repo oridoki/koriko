@@ -17,7 +17,6 @@ class KorikoContainer extends Pimple
     {
         $this->_initLogger();
         $this->_initConnectionHelpers();
-        $this->_initTaskHelpers();
     }
 
     /**
@@ -41,17 +40,6 @@ class KorikoContainer extends Pimple
     {
         $this['ssh'] = $this->share(function () {
             return new \Oridoki\Koriko\App\Ssh;
-        });
-    }
-
-    /**
-     * Setup the default helpers for tasks 
-     */
-    protected function _initTaskHelpers()
-    {
-        // singleton MySQL helper
-        $this['MySQL'] = $this->share(function () {
-            return new \Oridoki\Koriko\Helper\MySQL;
         });
     }
 }

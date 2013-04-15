@@ -15,15 +15,18 @@ class KorikoContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoggerGeneration()
     {
-        $logger = $this->_subject['logger'];
-        $this->assertNotNull($logger);
-        $this->assertInstanceOf('\Monolog\Logger', $logger);
+        $this->_assertDependency('logger', '\Monolog\Logger');
     }
 
     public function testSshHelperGeneration()
     {
-        $ssh = $this->_subject['ssh'];
-        $this->assertNotNull($ssh);
-        $this->assertInstanceOf('\Oridoki\Koriko\App\Ssh', $ssh);
+        $this->_assertDependency('ssh', '\Oridoki\Koriko\App\Ssh');
+    }
+
+    protected function _assertDependency($helperName, $helperClass)
+    {
+        $dependency = $this->_subject[$helperName];
+        $this->assertNotNull($dependency);
+        $this->assertInstanceOf($helperClass, $dependency);
     }
 }

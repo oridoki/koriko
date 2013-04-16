@@ -7,4 +7,4 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 use Oridoki\Koriko\App\Application;
 
 $application = new Application();
-$application->run();
+$application->init()->run();

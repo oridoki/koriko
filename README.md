@@ -1,6 +1,6 @@
 #Koriko - Getting started
 
-[![Build Status](https://secure.travis-ci.org/oridoki/koriko.png?branch=master)](https://travis-ci.org/oridoki/koriko)
+[![Build Status](https://secure.travis-ci.org/oridoki/koriko.png?branch=master)](https://travis-ci.org/oridoki/koriko) [![Coverage Status](https://coveralls.io/repos/kpacha/koriko/badge.png?branch=coveralls)](https://coveralls.io/r/kpacha/koriko?branch=coveralls)
 
 Koriko is a concept port from capistrano to php. 
 

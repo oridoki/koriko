@@ -1,6 +1,7 @@
 #Koriko - Getting started
 
 [![Build Status](https://secure.travis-ci.org/oridoki/koriko.png?branch=master)](https://travis-ci.org/oridoki/koriko)
+[![Scrutinizer](https://scrutinizer-ci.com/g/oridoki/koriko/badges/quality-score.png)](https://scrutinizer-ci.com/g/oridoki/koriko)
 
 Koriko is a concept port from capistrano to php. 
 
